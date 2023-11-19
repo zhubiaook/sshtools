@@ -1,0 +1,8 @@
+addrs:
+  - addr: 10.20.141.19:22
+    username: root
+    password: 123
+  - addr: 10.20.141.20:22
+    username: root
+    privateKeyPath: /root/.ssh/id_rsa
+
