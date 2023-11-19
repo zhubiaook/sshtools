@@ -52,8 +52,11 @@ build.%: tidy
 	$(eval OS := $(word 1,$(subst _, ,$(PLATFORM))))
 	$(eval ARCH := $(word 2,$(subst _, ,$(PLATFORM))))
 	@echo "===========> Building binary $(COMMAND) $(VERSION) for $(OS) $(ARCH)"
-	@mkdir -p $(OUTPUT_DIR)/$(OS)/$(ARCH)
-	@CGO_ENABLED=0 GOOS=$(OS) GOARCH=$(ARCH) go build -ldflags "$(GO_LDFLAGS)" -o $(OUTPUT_DIR)/$(OS)/$(ARCH)/$(COMMAND) $(ROOT_DIR)/cmd/$(COMMAND)
+	@mkdir -p $(OUTPUT_DIR)/bin/$(OS)/$(ARCH)
+	@CGO_ENABLED=0 GOOS=$(OS) GOARCH=$(ARCH) go build -ldflags "$(GO_LDFLAGS)" -o $(OUTPUT_DIR)/bin/$(OS)/$(ARCH)/$(COMMAND) $(ROOT_DIR)/cmd/$(COMMAND)
+	@mkdir -p $(OUTPUT_DIR)/release
+	@cp $(OUTPUT_DIR)/bin/$(OS)/$(ARCH)/$(COMMAND) $(OUTPUT_DIR)/release/$(COMMAND)-$(VERSION)-$(OS)-$(ARCH)
+	@cd $(OUTPUT_DIR)/release && sha256sum $(COMMAND)-$(VERSION)-$(OS)-$(ARCH) >> $(OUTPUT_DIR)/release/SHA256SUMS
 
 .PHONY: tidy
 tidy: 
