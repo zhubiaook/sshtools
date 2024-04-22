@@ -9,8 +9,8 @@ sshtools是一些基于SSH协议的工具，当前包含以下两个工具：
 ## 编译
 
 ```
-$ git clone http://gitlab.info.dbappsecurity.com.cn/databrain-public/production/mss-tools.git 
-$ cd mss-tools/sshtools
+$ https://github.com/zhubiaook/sshtools.git
+$ cd sshtools
 $ make
 ```
 
